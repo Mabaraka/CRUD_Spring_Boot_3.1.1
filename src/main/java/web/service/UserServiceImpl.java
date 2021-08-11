@@ -50,7 +50,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void update(Long id, User user) {
         User updateUser = userDao.findById(id).get();
-        updateUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (!(user.getPass().equals(""))) {
+            updateUser.setPassword(passwordEncoder.encode(user.getPass()));
+        }
         updateUser.setAge(user.getAge());
         updateUser.setName(user.getName());
         updateUser.setRoles(user.getRoles());
